@@ -1,0 +1,16 @@
+productId;name;price;quantity;expected
+M01;Monitor 27;32990;2;OK:qty=2
+K01;Keyboard;4490;3;OK:qty=3
+M01;Monitor 27;32990;1;OK:merged,qty=3
+X01;Broken;-100;1;SKIP:price
+P03;Mouse;1000;1;OK:qty=1
+P04;Laptop;50000;1;OK:qty=1
+P05;Printer;12000;1;OK:qty=1
+P06;Scanner;8000;1;OK:qty=1
+P07;Camera;15000;1;OK:qty=1
+P08;Router;5000;1;OK:qty=1
+P09;Headphones;3000;1;OK:qty=1
+P10;Microphone;4000;1;OK:qty=1
+P11;Tablet;20000;1;SKIP:limit
+M01;Monitor 27;32990;1;OK:merged,qty=4
+TOTAL;positions=10;sum=243430.00

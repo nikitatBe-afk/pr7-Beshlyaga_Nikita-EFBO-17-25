@@ -1,0 +1,139 @@
+
+digraph ClassDiagram {
+    graph [
+        rankdir=TB,
+        bgcolor="white",
+        dpi=200,
+        nodesep=0.6,
+        ranksep=0.9,
+        pad=0.4
+    ];
+
+    node [
+        shape=record,
+        style=filled,
+        fillcolor="#EAF2F8",
+        color="#2F5597",
+        fontname="Arial",
+        fontsize=12,
+        margin="0.15,0.12"
+    ];
+
+    edge [
+        fontname="Arial",
+        fontsize=10,
+        color="#555555"
+    ];
+
+    Product [
+        label="{Product|
+            - id: String\l
+            - name: String\l
+            - price: double\l|
+            + Product(id, name, price)\l
+            + getId(): String\l
+            + getName(): String\l
+            + getPrice(): double\l
+        }"
+    ];
+
+    Employee [
+        label="{Employee (record)|
+            - id: String\l
+            - fullName: String\l|
+            + Employee(id, fullName)\l
+            + id(): String\l
+            + fullName(): String\l
+        }"
+    ];
+
+    OrderItem [
+        label="{OrderItem|
+            - product: Product\l
+            - quantity: int\l|
+            + OrderItem(product, quantity)\l
+            - setQuantity(quantity): void\l
+            + increase(delta): void\l
+            + getProduct(): Product\l
+            + getQuantity(): int\l
+            + getLineTotal(): double\l
+        }"
+    ];
+
+    OrderStatus [
+        label="{«enum» OrderStatus|
+            DRAFT\l
+            CONFIRMED\l
+        }",
+        fillcolor="#FFF2CC"
+    ];
+
+    Order [
+        label="{Order|
+            - employee: Employee\l
+            - items: List\<OrderItem\>\l
+            - status: OrderStatus\l|
+            + Order(employee)\l
+            + addProduct(product, quantity): void\l
+            + removeProduct(productId): void\l
+            + total(): double\l
+            + confirm(): void\l
+            + getItems(): List\<OrderItem\>\l
+            + getStatus(): OrderStatus\l
+            + addPositionCount(order): int\l
+        }",
+        fillcolor="#E2F0D9",
+        color="#548235"
+    ];
+
+    OrderService [
+        label="{OrderService|
+            + createOrder(employee): Order\l
+        }"
+    ];
+
+    SelfCheck [
+        label="{SelfCheck|
+            + main(args): void\l
+            - check(condition, name): void\l
+            - runDataDriven(): void\l
+            - runInteractive(): void\l
+        }",
+        fillcolor="#E4DFEC"
+    ];
+
+    // Связи между классами
+    Order -> Employee [
+        label="сотрудник",
+        arrowhead=odiamond
+    ];
+
+    Order -> OrderItem [
+        label="позиции 0..10",
+        arrowhead=diamond
+    ];
+
+    OrderItem -> Product [
+        label="товар",
+        arrowhead=vee
+    ];
+
+    Order -> OrderStatus [
+        label="статус",
+        style=dashed,
+        arrowhead=vee
+    ];
+
+    OrderService -> Order [
+        label="создаёт",
+        style=dashed,
+        arrowhead=vee
+    ];
+
+    SelfCheck -> OrderService [
+        label="использует",
+        style=dashed,
+        arrowhead=vee
+    ];
+}
+}
